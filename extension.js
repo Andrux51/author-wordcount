@@ -59,12 +59,8 @@ exports.activate = (context) => {
                 })
                 .then(() => {
                     Promise.all(promises).then(() => {
-                        output.appendLine(`
-                            Current file: ${_countWords(doc).toLocaleString()} words | ${_countCharacters(doc).toLocaleString()} characters
-                        `);
-                        output.appendLine(`
-                            Total Count: ${totalWordCount.toLocaleString()} words | ${totalCharCount.toLocaleString()} characters
-                        `);
+                        output.appendLine(`Current file: ${_countWords(doc).toLocaleString()} words | ${_countCharacters(doc).toLocaleString()} characters`);
+                        output.appendLine(`Total Count: ${totalWordCount.toLocaleString()} words | ${totalCharCount.toLocaleString()} characters`);
                     });
                 });
         });
@@ -78,27 +74,8 @@ exports.activate = (context) => {
         output.clear();
         output.show();
 
-        output.appendLine(`
-            Current file: ${_countWords(doc).toLocaleString()} words | ${_countCharacters(doc).toLocaleString()} characters
-        `);
+        output.appendLine(`Current file: ${_countWords(doc).toLocaleString()} words | ${_countCharacters(doc).toLocaleString()} characters`);
     });
-
-    /*
-        Command: AWC: View Author Word Count
-         - display word count(s) in status bar
-         x open output channel
-         x show word count for all files
-         x show word count for current file
-         - show word count for selection
-         x show character count for current file (optional)
-         - show character count for selection (optional)
-         x show character count for all files (optional)
-         x clear before next display 
-         - clear and redraw on file change (have some kind of timeout to debounce this (2 sec?))
-         - be sure to update on workspace folder change, file added, etc.
-         - show page count* (possibly large effort, explain estimating by lines per page)
-         - show daily word count* (maybe impossible, based on UX)
-    */
 
     context.subscriptions.push(countAllCommand);
     context.subscriptions.push(countFileCommand);
