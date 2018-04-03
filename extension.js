@@ -23,25 +23,25 @@ exports.activate = (context) => {
 
         const config = vscode.workspace.getConfiguration('authorWordCount');
 
-        _getFolderName().then((inputResult) => {
-            if(inputResult) {
+        _getFolderName().then((folderName) => {
+            if(folderName) {
                 // sanitize input to remove trailing slash if applicable
-                if(inputResult.endsWith('/')) {
-                    inputResult = inputResult.substring(0, inputResult.length - 1);
+                if(folderName.endsWith('/')) {
+                    folderName = folderName.substring(0, folderName.length - 1);
                 }
 
-                config.update('mainFolder', inputResult, vscode.ConfigurationTarget.Global);
+                config.update('mainFolder', folderName, vscode.ConfigurationTarget.Global);
             } else {
-                inputResult = config.get('mainFolder');
+                folderName = config.get('mainFolder');
             }
 
             let promises = [];
 
-            vscode.window.showInformationMessage(inputResult
-                ? `Counting words for all markdown files in ${inputResult}`
+            vscode.window.showInformationMessage(folderName
+                ? `Counting words for all markdown files in ${folderName}`
                 : `Now counting all words!`);
 
-            const include = `**/${inputResult ? inputResult+'/' : ''}**/*.${MARKDOWN_EXTENSION}`;
+            const include = `**/${folderName ? folderName+'/' : ''}**/*.${MARKDOWN_EXTENSION}`;
             const exclude = `**/{node_modules,bower_components}/**`;
             vscode.workspace.findFiles(include, exclude)
                 .then((result) => {
@@ -62,11 +62,11 @@ exports.activate = (context) => {
 
                         // only display current file count if within the main folder
                         const regexSlashes = String.raw`(\\|/)`;
-                        if(doc.fileName.match(new RegExp(`${regexSlashes}${inputResult}${regexSlashes}`)) && doc.fileName.endsWith('md')) {
+                        if(doc.fileName.match(new RegExp(`${regexSlashes}${folderName}${regexSlashes}`)) && doc.fileName.endsWith('md')) {
                             _displayCountCurrentFile(doc);
                         }
                         output.appendLine(``);
-                        output.appendLine(`Total Count (within '${inputResult}' folder)`);
+                        output.appendLine(`Total Count (within '${folderName}' folder)`);
                         output.appendLine(`${totalWordCount.toLocaleString()} words | ${totalCharCount.toLocaleString()} characters`);
                     });
                 });
@@ -130,9 +130,9 @@ _countCharacters = (doc) => {
 _clearAndShowOutput = () => {
     output.clear();
     output.show();
-}
+};
 
 _displayCountCurrentFile = (doc) => {
     output.appendLine(`Current file (${doc.fileName.match(/\w+(\s+\w+)*\.md/)[0]})`);
     output.appendLine(`${_countWords(doc).toLocaleString()} words | ${_countCharacters(doc).toLocaleString()} characters`);
-}
+};
