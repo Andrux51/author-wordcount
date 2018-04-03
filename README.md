@@ -20,11 +20,22 @@ The target audience for this extension is indie authors who would like to gain t
 
 ![count current file](sample/img2.png)
 
-## Count files in folder
+## Count files in main folder & subfolders
 
 ![count all words](sample/img3.png)
 
 <!-- Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow. -->
+
+## How to use
+
+* Keyboard shortcut (count all markdown files in main folder & subfolders)
+  * Windows/Linux users: `Ctrl` + `Alt` + `C`
+  * Mac users: `Cmd` + `Alt` + `C`
+* Visual Studio Code command
+  * Open menu with `Ctrl` + `Shift` + `P`
+  * Type `AWC` to see the author-wordcount commands
+  * Choose your desired command with the `arrow keys`
+  * Press `Enter` to run the selected command
 
 ## Extension Settings
 
