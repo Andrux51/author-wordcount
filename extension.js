@@ -60,19 +60,20 @@ exports.activate = (context) => {
                     Promise.all(promises).then(() => {
                         _clearAndShowOutput();
 
+                        // only display current file count if within the main folder
                         const regexSlashes = String.raw`(\\|/)`;
                         if(doc.fileName.match(new RegExp(`${regexSlashes}${inputResult}${regexSlashes}`)) && doc.fileName.endsWith('md')) {
-                            output.appendLine(`Current file: ${_countWords(doc).toLocaleString()} words | ${_countCharacters(doc).toLocaleString()} characters`);
+                            _displayCountCurrentFile(doc);
                         }
-                        output.appendLine(`Total Count: ${totalWordCount.toLocaleString()} words | ${totalCharCount.toLocaleString()} characters`);
+                        output.appendLine(``);
+                        output.appendLine(`Total Count (within '${inputResult}' folder)`);
+                        output.appendLine(`${totalWordCount.toLocaleString()} words | ${totalCharCount.toLocaleString()} characters`);
                     });
                 });
         });
     });
 
     let countFileCommand = vscode.commands.registerCommand('awc.countInFile', () => {
-        vscode.window.showInformationMessage('Now counting in '+ vscode.window.activeTextEditor.document.fileName);
-
         const doc = vscode.window.activeTextEditor.document;
 
         if(!doc.fileName.endsWith('md')) {
@@ -80,9 +81,11 @@ exports.activate = (context) => {
             return false;
         }
 
+        vscode.window.showInformationMessage('Now counting in '+ doc.fileName.match(/\w+(\s+\w+)*\.md/)[0]);
 
         _clearAndShowOutput();
-        output.appendLine(`Current file: ${_countWords(doc).toLocaleString()} words | ${_countCharacters(doc).toLocaleString()} characters`);
+
+        _displayCountCurrentFile(doc);
     });
 
     context.subscriptions.push(countAllCommand);
@@ -129,3 +132,7 @@ _clearAndShowOutput = () => {
     output.show();
 }
 
+_displayCountCurrentFile = (doc) => {
+    output.appendLine(`Current file (${doc.fileName.match(/\w+(\s+\w+)*\.md/)[0]})`);
+    output.appendLine(`${_countWords(doc).toLocaleString()} words | ${_countCharacters(doc).toLocaleString()} characters`);
+}
