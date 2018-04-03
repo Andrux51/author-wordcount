@@ -75,6 +75,11 @@ exports.activate = (context) => {
 
         const doc = vscode.window.activeTextEditor.document;
 
+        if(!doc.fileName.endsWith('md')) {
+            vscode.window.showInformationMessage(`Current file is not a markdown file`);
+            return false;
+        }
+
 
         _clearAndShowOutput();
         output.appendLine(`Current file: ${_countWords(doc).toLocaleString()} words | ${_countCharacters(doc).toLocaleString()} characters`);
