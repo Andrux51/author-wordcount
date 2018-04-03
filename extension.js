@@ -42,7 +42,7 @@ exports.activate = (context) => {
                 ? `Counting words for all markdown files in ${inputResult}`
                 : `Now counting all words!`);
 
-            const include = `${inputResult ? inputResult+'/' : ''}**/*.${MARKDOWN_EXTENSION}`;
+            const include = `**/${inputResult ? inputResult+'/' : ''}**/*.${MARKDOWN_EXTENSION}`;
             const exclude = `**/{node_modules,bower_components}/**`;
             vscode.workspace.findFiles(include, exclude)
                 .then((result) => {
