@@ -2,7 +2,7 @@
 
 ## Description
 
-This **Visual Studio Code extension** allows tracking word count across multiple files, a feature that will be beneficial to anyone used to writing with a program like Scrivener.
+This **Visual Studio Code extension** allows tracking word count across multiple **markdown** files, a feature that will be beneficial to anyone used to writing with a program like Scrivener.
 
 The target audience for this extension is indie authors who would like to gain the benefits of leveraging source control systems like Git and also, free software never hurts.
 
