@@ -34,7 +34,13 @@
                     }
                 }
             }
-        ]
+        ],
+        "keybindings": [{
+            "command": "awc.countAll",
+            "when": "editorTextFocus",
+            "win": "ctrl+alt+c",
+            "mac": "cmd+alt+c"
+        }]
     },
     "scripts": {
         "postinstall": "node ./node_modules/vscode/bin/install",

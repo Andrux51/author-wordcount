@@ -23,6 +23,8 @@ exports.activate = (context) => {
 
         const config = vscode.workspace.getConfiguration('authorWordCount');
 
+        _clearAndShowOutput();
+
         _getFolderName().then((folderName) => {
             if(folderName) {
                 // sanitize input to remove trailing slash if applicable
@@ -58,16 +60,13 @@ exports.activate = (context) => {
                 })
                 .then(() => {
                     Promise.all(promises).then(() => {
-                        _clearAndShowOutput();
-
                         // only display current file count if within the main folder
                         const regexSlashes = String.raw`(\\|/)`;
                         if(doc.fileName.match(new RegExp(`${regexSlashes}${folderName}${regexSlashes}`)) && doc.fileName.endsWith('md')) {
                             _displayCountCurrentFile(doc);
                         }
-                        output.appendLine(``);
-                        output.appendLine(`Total Count (within '${folderName}' folder)`);
-                        output.appendLine(`${totalWordCount.toLocaleString()} words | ${totalCharCount.toLocaleString()} characters`);
+
+                        _displayCountAllFiles(folderName, totalWordCount, totalCharCount);
                     });
                 });
         });
@@ -135,4 +134,10 @@ _clearAndShowOutput = () => {
 _displayCountCurrentFile = (doc) => {
     output.appendLine(`Current file (${doc.fileName.match(/\w+(\s+\w+)*\.md/)[0]})`);
     output.appendLine(`${_countWords(doc).toLocaleString()} words | ${_countCharacters(doc).toLocaleString()} characters`);
+};
+
+_displayCountAllFiles = (folder, wordCount, charCount) => {
+    output.appendLine(``);
+    output.appendLine(`Total Count (within '${folder}' folder)`);
+    output.appendLine(`${wordCount.toLocaleString()} words | ${charCount.toLocaleString()} characters`);
 };
