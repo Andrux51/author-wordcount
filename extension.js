@@ -92,11 +92,14 @@ _getFolderName = () => {
 
 _countWords = (doc) => {
     let docContent = doc.getText();
+    let wordCount = 0;
 
     // Parse out unwanted whitespace so the split is accurate
-    docContent = docContent.replace(/(< ([^>]+)<)/g, '').replace(/\s+/g, ' ');
-    docContent = docContent.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-    let wordCount = 0;
+    docContent = docContent
+        .replace(/(< ([^>]+)<)/g, '')
+        .replace(/\s+/g, ' ')
+        .replace(/^\s\s*/, '')
+        .replace(/\s\s*$/, '');
     if (docContent != "") {
         wordCount = docContent.split(" ").length;
     }
