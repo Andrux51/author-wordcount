@@ -56,8 +56,14 @@ Defect (D) or upcoming Feature (F) - not necessarily planned in this order.
 
 ## Release Notes
 
+### 1.1.0
+
+* Add keyboard shortcut to Count All
+* Improve visibility of file & folder names
+* Enforce validation of markdown for counting current file
+
 ### 1.0.0
 
-Initial release of author-wordcount
+* Initial release of author-wordcount
 * Enable VSC command for counting words in current file
 * Enable VSC command for counting words in folder
