@@ -14,9 +14,6 @@ exports.activate = (context) => {
     let countAllCommand = vscode.commands.registerCommand('awc.countAll', function () {
         const doc = vscode.window.activeTextEditor.document;
 
-        output.clear();
-        output.show();
-        
         let totalWordCount = 0;
         let totalCharCount = 0;
 
@@ -61,6 +58,8 @@ exports.activate = (context) => {
                 })
                 .then(() => {
                     Promise.all(promises).then(() => {
+                        _clearAndShowOutput();
+
                         const regexSlashes = String.raw`(\\|/)`;
                         if(doc.fileName.match(new RegExp(`${regexSlashes}${inputResult}${regexSlashes}`)) && doc.fileName.endsWith('md')) {
                             output.appendLine(`Current file: ${_countWords(doc).toLocaleString()} words | ${_countCharacters(doc).toLocaleString()} characters`);
@@ -76,9 +75,8 @@ exports.activate = (context) => {
 
         const doc = vscode.window.activeTextEditor.document;
 
-        output.clear();
-        output.show();
 
+        _clearAndShowOutput();
         output.appendLine(`Current file: ${_countWords(doc).toLocaleString()} words | ${_countCharacters(doc).toLocaleString()} characters`);
     });
 
@@ -120,3 +118,9 @@ _countWords = (doc) => {
 _countCharacters = (doc) => {
     return doc.getText().length;
 };
+
+_clearAndShowOutput = () => {
+    output.clear();
+    output.show();
+}
+
