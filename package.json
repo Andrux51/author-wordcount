@@ -1,0 +1,38 @@
+{
+    "name": "author-wordcount",
+    "displayName": "author-wordcount",
+    "description": "Word count across all files for authors and writers",
+    "version": "0.0.1",
+    "publisher": "andrux51",
+    "engines": {
+        "vscode": "^1.21.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:awc.countAll",
+        "onCommand:awc.countInFile"
+    ],
+    "main": "./extension",
+    "contributes": {
+        "commands": [{
+            "command": "awc.countAll",
+            "title": "AWC: Count All Words"
+        },{
+            "command": "awc.countInFile",
+            "title": "AWC: Count Words (Current File)"
+        }]
+    },
+    "scripts": {
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "eslint": "^4.11.0",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    }
+}
