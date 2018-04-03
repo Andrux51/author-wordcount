@@ -30,7 +30,7 @@ The target audience for this extension is indie authors who would like to gain t
 
 This extension contributes the following settings:
 
-* (_Not yet implemented_) `authorWordCount.mainFolder`: default folder for word counting
+* `authorWordCount.mainFolder`: default folder for word counting
   * Expected values: `"folder name"` or `null`
 
 ## Known Issues, Upcoming Features

@@ -24,16 +24,18 @@ exports.activate = (context) => {
         // in this case, also add a command to change the folder to be counted
         // so, can reuse a showInputBox function that returns a Thenable
 
-        // let countFolder = context.globalState.get('countFolder');
+        const config = vscode.workspace.getConfiguration('authorWordCount');
 
         _getFolderName().then((inputResult) => {
             if(inputResult) {
-                context.globalState.update('countFolder', inputResult);
-
                 // sanitize input to remove trailing slash if applicable
                 if(inputResult.endsWith('/')) {
                     inputResult = inputResult.substring(0, inputResult.length - 1);
                 }
+
+                config.update('mainFolder', inputResult, vscode.ConfigurationTarget.Global);
+            } else {
+                inputResult = config.get('mainFolder');
             }
 
             let promises = [];
@@ -87,6 +89,11 @@ exports.deactivate = () => {
 
 // private functions
 _getFolderName = () => {
+    if (vscode.workspace.getConfiguration('authorWordCount').get('mainFolder')) {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
     return vscode.window.showInputBox({prompt: 'Folder to count words in?', value: 'book', placeHolder: 'base folder name'});
 };
 

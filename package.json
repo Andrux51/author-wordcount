@@ -22,7 +22,19 @@
         },{
             "command": "awc.countInFile",
             "title": "AWC: Count Words (Current File)"
-        }]
+        }],
+        "configuration": [
+            {
+                "title": "Author Wordcount",
+                "properties": {
+                    "authorWordCount.mainFolder": {
+                        "type": ["string", "null"],
+                        "default": null,
+                        "description": "Main folder with all markdown files (including those in subfolders) to be counted."
+                    }
+                }
+            }
+        ]
     },
     "scripts": {
         "postinstall": "node ./node_modules/vscode/bin/install",
