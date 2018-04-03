@@ -37,6 +37,7 @@
         ],
         "keybindings": [{
             "command": "awc.countAll",
+            "key": "ctrl+alt+c",
             "when": "editorTextFocus",
             "win": "ctrl+alt+c",
             "mac": "cmd+alt+c"

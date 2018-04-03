@@ -39,7 +39,6 @@ Defect (D) or upcoming Feature (F) - not necessarily planned in this order.
 
 * F: Show word count on status bar (bottom of screen)
 * F: Add hotkey or chord for counting words in current file
-* F: Add hotkey or chord for counting words in folder from settings
 * F: Ability to see word count for highlighted/selected words
 * F: Attempt to show page count (how to estimate this?)
 * F: Attempt to show daily word count (not sure if possible)
