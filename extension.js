@@ -61,7 +61,10 @@ exports.activate = (context) => {
                 })
                 .then(() => {
                     Promise.all(promises).then(() => {
-                        output.appendLine(`Current file: ${_countWords(doc).toLocaleString()} words | ${_countCharacters(doc).toLocaleString()} characters`);
+                        const regexSlashes = String.raw`(\\|/)`;
+                        if(doc.fileName.match(new RegExp(`${regexSlashes}${inputResult}${regexSlashes}`)) && doc.fileName.endsWith('md')) {
+                            output.appendLine(`Current file: ${_countWords(doc).toLocaleString()} words | ${_countCharacters(doc).toLocaleString()} characters`);
+                        }
                         output.appendLine(`Total Count: ${totalWordCount.toLocaleString()} words | ${totalCharCount.toLocaleString()} characters`);
                     });
                 });
