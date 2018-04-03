@@ -9,9 +9,9 @@ The target audience for this extension is indie authors who would like to gain t
 ## Features
 
 * Count words in the current file
-* Count words across all files in a specified folder
+* Count words across all markdown files in a specified folder
   * Including subfolders
-* Count all words in project folder regardless of hierarchy
+* Count all words in project folder markdown files regardless of hierarchy
 
 ## Screenshots
 
